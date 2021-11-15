@@ -16,6 +16,7 @@ Role Variables
 --------------
 
 | Variable name | Default | Description |
+| :------------ | :------ | :---------- |
 | filebeat_version | 7.14.0 | Filebeat version to be installed |
 | filebeat_es_url | "http://localhost:9200" | Url to Elasticsearch server |
 | filebeat_kibana_url | "http://localhost:5601" | Url to Kibana server |
