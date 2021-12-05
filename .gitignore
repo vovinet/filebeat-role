@@ -1,0 +1,3 @@
+molecule/default/files/*
+molecule/lite/files/*
+.tox/*

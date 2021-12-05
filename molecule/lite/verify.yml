@@ -1,0 +1,22 @@
+---
+#
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Remove old logs
+    command: rm -f /var/log/filebeat/filebeat.log
+
+  - name: Run Filebeat
+    shell: /usr/share/filebeat/bin/filebeat -c /etc/filebeat/filebeat.yml -path.home /usr/share/filebeat -path.config /etc/filebeat -path.data /var/lib/filebeat -path.logs /var/log/filebeat 2>&1 & sleep 5
+
+  - name: Analyze logs
+    shell: cat /var/log/filebeat/filebeat
+    register: service_log
+
+  - name: Service Check
+    assert:
+      that: '"Loading of config files completed" in service_log.stdout'
+
+  - name: Kill Filebeat
+    shell: pkill -15 filebeat
